@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SessionEnder</RootNamespace>
     <AssemblyName>SessionEnder</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,10 +30,37 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Sitecore.Analytics, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Analytics.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Kernel">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Kernel.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Services.Client">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Services.Core">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Services.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Services.Infrastructure">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Services.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Sitecore.Services.Infrastructure.Sitecore">
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\Sitecore.Services.Infrastructure.Sitecore.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\inetpub\wwwroot\Sitecore 8 150223\Website\bin\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,10 +68,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\AnalyticsSessionEnder.cs" />
+    <Compile Include="PipelineProcessors\AbortSitecoreForKnownRoutes.cs" />
+    <Compile Include="PipelineProcessors\RegisterRoutePipelineProcessor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rules\FlushAnalyticsRuleActioncs.cs" />
+    <Compile Include="SessionEnder.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="API\" />
+    <Content Include="layouts\sublayouts\End Session Button.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Config\Include\RegisterRoutePipelineProcessor.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
